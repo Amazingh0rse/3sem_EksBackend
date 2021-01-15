@@ -4,7 +4,6 @@ nb-configuration.xml
 /target/
 
 /src/main/java/utils/SetupTestUsers.java
-/src/main/java/security/SharedSecret.java
-/src/main/resources/META-INF/persistence.xml
+
 
 /nbproject/
