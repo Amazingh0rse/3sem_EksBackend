@@ -40,7 +40,7 @@ public class Person implements Serializable {
     @JoinTable(name = "user_roles", joinColumns = {
         @JoinColumn(name = "email", referencedColumnName = "email")}, inverseJoinColumns = {
         @JoinColumn(name = "role_name", referencedColumnName = "role_name")})
-    @ManyToMany
+    @ManyToMany (cascade = CascadeType.PERSIST)
     private List<Role> roleList = new ArrayList<>();
 
 
