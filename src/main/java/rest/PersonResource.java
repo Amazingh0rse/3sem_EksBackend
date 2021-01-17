@@ -28,7 +28,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import utils.EMF_Creator;
 
-@Path("info")
+//@Path("info")
 public class PersonResource {
     
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();

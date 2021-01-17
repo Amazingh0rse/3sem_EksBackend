@@ -4,6 +4,7 @@ import entities.Dog;
 import entities.User;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserDTO {
 
@@ -17,7 +18,8 @@ public class UserDTO {
     public UserDTO(User user) {
         this.userName = user.getUserName();
         this.password = user.getUserPassword();
-        
+        user.getDogList().forEach((dog) -> { this.dogList.add(new DogDTO(dog));
+        });
     }
 
     public String getUserName() {

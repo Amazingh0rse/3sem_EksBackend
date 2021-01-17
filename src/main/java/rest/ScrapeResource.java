@@ -13,7 +13,7 @@ import webscraper.TagCounter;
 import webscraper.TagDTO;
 import webscraper.Tester;
 
-@Path("scrape")
+//@Path("scrape")
 public class ScrapeResource {
 
     @Context

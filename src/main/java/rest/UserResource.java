@@ -2,37 +2,28 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import dto.HobbyDTO;
-import dto.PersonDTO;
-import dto.PersonsDTO;
 import dto.UserDTO;
 import dto.UsersDTO;
-import entities.Person;
 import entities.User;
 import errorhandling.NotFoundException;
-import facades.PersonFacade;
 import facades.UserFacade;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import utils.EMF_Creator;
 
-@Path("info")
+@Path("user")
 public class UserResource {
     
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
@@ -87,7 +78,7 @@ public class UserResource {
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("user/{userName}")
+    @Path("username/{userName}")
     public String getUsersByName(@PathParam("userName") String userName) throws NotFoundException {
 
         return GSON.toJson(FACADE.getUserByName(userName));
@@ -96,7 +87,7 @@ public class UserResource {
     
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    @Path("user/all")
+    @Path("all")
     public String getAllUsers() throws NotFoundException {
         UsersDTO usDTO = FACADE.getAllUsers();
         return GSON.toJson(usDTO);

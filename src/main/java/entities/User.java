@@ -117,7 +117,11 @@ public class User implements Serializable {
     }
 
     public void addDog (Dog dog) {
-        this.dogList.add(dog);
+        if (dog !=null){
+            dogList.add(dog);
+            dog.setUser(this);
+        }
+        
     }
     
     public List<Dog> getDogList() {

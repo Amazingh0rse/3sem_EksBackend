@@ -86,7 +86,7 @@ public class UserFacade {
         EntityManager em = emf.createEntityManager();
         UsersDTO usDTO;
         try {
-            usDTO = new UsersDTO(em.createQuery("SELECT p FROM Users p").getResultList());
+            usDTO = new UsersDTO(em.createQuery("SELECT p FROM User p").getResultList());
         } catch (Exception e) {
             throw new NotFoundException("No connection to the database");
         } finally {

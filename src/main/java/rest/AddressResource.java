@@ -19,7 +19,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import utils.EMF_Creator;
 
-@Path("address")
+
+//@Path("address")
 public class AddressResource {
     
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();

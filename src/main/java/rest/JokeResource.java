@@ -14,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import utils.HttpUtils;
 
-@Path("jokes")
+//@Path("jokes")
 public class JokeResource {
 
     @Context

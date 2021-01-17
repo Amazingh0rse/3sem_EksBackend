@@ -26,7 +26,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 import utils.EMF_Creator;
 
-@Path("hobby")
+//@Path("hobby")
 public class HobbyResource {
     
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
