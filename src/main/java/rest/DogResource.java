@@ -2,15 +2,12 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import dto.AddressesDTO;
 import dto.DogDTO;
 import dto.DogsDTO;
-import dto.HobbyDTO;
-import entities.Address;
+
 import entities.Dog;
 import errorhandling.MissingInputException;
 import errorhandling.NotFoundException;
-import facades.AddressFacade;
 import facades.DogFacade;
 import java.util.List;
 import javax.persistence.EntityManager;

@@ -1,10 +1,7 @@
 package facades;
 
-import dto.AddressDTO;
-import dto.AddressesDTO;
 import dto.DogDTO;
 import dto.DogsDTO;
-import entities.Address;
 import entities.Dog;
 import errorhandling.MissingInputException;
 import errorhandling.NotFoundException;
