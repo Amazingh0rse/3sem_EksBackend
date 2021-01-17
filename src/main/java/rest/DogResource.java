@@ -14,14 +14,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import utils.EMF_Creator;
 
 @Path("dog")
@@ -67,12 +70,12 @@ public class DogResource {
     }
     
     
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("name/{name}")
-    public String getDogByName(@PathParam("name") String name) throws NotFoundException {
-        return GSON.toJson(FACADE.getDogByName(name));
-    }
+//    @GET
+//    @Produces(MediaType.APPLICATION_JSON)
+//    @Path("name/{name}")
+//    public String getDogByName(@PathParam("name") String name) throws NotFoundException {
+//        return GSON.toJson(FACADE.getDogByName(name));
+//    }
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -89,5 +92,26 @@ public class DogResource {
         DogDTO DogDTO = FACADE.addDog(d.getName(), d.getDateOfBirth(), d.getInfo(), d.getBreed());
         return GSON.toJson(DogDTO);
     }
+    
+    @DELETE
+    @Path("removeDog/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response removeDogfromUser(@PathParam("id")long id) throws NotFoundException{
+        
+        FACADE.deleteDog(id);
+        
+        return Response.status(Response.Status.OK).entity("Dog removed from user OK").build();
+    }  
+    
+//    @PUT
+//    @Path("updatedog")
+//    @Produces({MediaType.APPLICATION_JSON})
+//    @Consumes({MediaType.APPLICATION_JSON})
+//    public Response updatePerson(String dog) throws NotFoundException{
+//        DogDTO DogDTO = GSON.fromJson(dog, DogDTO.class);
+//        FACADE.updatePerson(DogDTO);
+//        return Response.status(Response.Status.OK).entity("Person updated OK").build();
+//    }    
  
 }

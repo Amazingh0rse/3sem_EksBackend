@@ -134,16 +134,5 @@ public class UserResource {
         
         return Response.status(Response.Status.OK).entity("Dog added to user OK").build();
     }  
-    
-    @PUT
-    @Path("removeDog/{username}/{id}")
-    @Produces({MediaType.APPLICATION_JSON})
-    @Consumes({MediaType.APPLICATION_JSON})
-    public Response removeDogfromUser(@PathParam("username")String userName, @PathParam("id")long id) throws NotFoundException{
-        
-        FACADE.removeDogFromUser(userName, id);
-        
-        return Response.status(Response.Status.OK).entity("Dog removed from user OK").build();
-    }  
-    
+ 
 }

@@ -2,7 +2,9 @@ package facades;
 
 import dto.DogDTO;
 import dto.DogsDTO;
+import dto.UserDTO;
 import entities.Dog;
+import entities.User;
 import errorhandling.MissingInputException;
 import errorhandling.NotFoundException;
 import java.time.LocalDate;
@@ -102,8 +104,25 @@ public class DogFacade {
             em.close();
         }
         return dsDTO;
-
     }
+    
+    public DogDTO deleteDog(Long id) throws NotFoundException {
+        EntityManager em = emf.createEntityManager();
+        Dog dog = em.find(Dog.class, id);
+        if (id == null) {
+            throw new NotFoundException("Could not delete dog, provided id does not exist");
+        } else {
+            try {
+                em.getTransaction().begin();
+                em.remove(dog);
+                em.getTransaction().commit();
+            } finally {
+                em.close();
+            }
+            return new DogDTO(dog);
+        }
+    }
+    
     private static boolean isNameInValid(String name, String info, String breed, String dateOfBirth) {
         return (name.length() == 0) || (info.length() == 0) || (breed.length() == 0) || (dateOfBirth.length() == 0);
     }
