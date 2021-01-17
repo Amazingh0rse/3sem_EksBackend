@@ -10,6 +10,7 @@ import errorhandling.MissingInputException;
 import errorhandling.NotFoundException;
 import facades.DogFacade;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
@@ -104,14 +105,16 @@ public class DogResource {
         return Response.status(Response.Status.OK).entity("Dog removed from user OK").build();
     }  
     
-//    @PUT
-//    @Path("updatedog")
-//    @Produces({MediaType.APPLICATION_JSON})
-//    @Consumes({MediaType.APPLICATION_JSON})
-//    public Response updatePerson(String dog) throws NotFoundException{
-//        DogDTO DogDTO = GSON.fromJson(dog, DogDTO.class);
-//        FACADE.updatePerson(DogDTO);
-//        return Response.status(Response.Status.OK).entity("Person updated OK").build();
-//    }    
+    @PUT
+    @Path("update")
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response updateDog(String dog) throws NotFoundException {
+        //DogDTO DogDTO = GSON.fromJson(dog, DogDTO.class);
+        DogDTO dogDTO = GSON.fromJson(dog, DogDTO.class);
+        FACADE.updateDog(dogDTO);        
+        return Response.status(Response.Status.OK).entity("dog updated OK").build();
+    }            
+
  
 }

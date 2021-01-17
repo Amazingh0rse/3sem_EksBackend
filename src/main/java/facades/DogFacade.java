@@ -8,8 +8,12 @@ import entities.User;
 import errorhandling.MissingInputException;
 import errorhandling.NotFoundException;
 import java.time.LocalDate;
+import java.util.List;
+import javax.persistence.Cache;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 
 public class DogFacade {
 
@@ -113,9 +117,15 @@ public class DogFacade {
             throw new NotFoundException("Could not delete dog, provided id does not exist");
         } else {
             try {
-                em.getTransaction().begin();
+                EntityTransaction txn = em.getTransaction();
+                txn.begin();
                 em.remove(dog);
-                em.getTransaction().commit();
+                txn.commit();
+            
+                //attempt to get hibernate to clear cache
+                Cache cache = emf.getCache();
+                cache.evictAll();
+                
             } finally {
                 em.close();
             }
@@ -123,7 +133,31 @@ public class DogFacade {
         }
     }
     
+     public void updateDog(DogDTO d) throws NotFoundException {
+        EntityManager em = emf.createEntityManager();
+        Dog dog = em.find(Dog.class, d.getId());
+        if (dog== null) {
+            throw new NotFoundException("No dog found");
+        }
+        dog.setName(d.getName());
+        dog.setBreed(d.getBreed());
+        dog.setDateOfBirth(d.getDateOfBirth());
+        dog.setInfo(d.getInfo());
+     
+        try {
+            em.getTransaction().begin();
+            em.merge(dog);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+    }
+    
+    
+    
     private static boolean isNameInValid(String name, String info, String breed, String dateOfBirth) {
         return (name.length() == 0) || (info.length() == 0) || (breed.length() == 0) || (dateOfBirth.length() == 0);
     }
 }
+
+
