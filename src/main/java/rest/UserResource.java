@@ -5,9 +5,13 @@ import com.google.gson.GsonBuilder;
 import dto.HobbyDTO;
 import dto.PersonDTO;
 import dto.PersonsDTO;
+import dto.UserDTO;
+import dto.UsersDTO;
 import entities.Person;
+import entities.User;
 import errorhandling.NotFoundException;
 import facades.PersonFacade;
+import facades.UserFacade;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
@@ -29,7 +33,7 @@ import javax.ws.rs.core.SecurityContext;
 import utils.EMF_Creator;
 
 @Path("info")
-public class PersonResource {
+public class UserResource {
     
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
     @Context
@@ -38,7 +42,7 @@ public class PersonResource {
     @Context
     SecurityContext securityContext;
     
-    private static final PersonFacade FACADE =  PersonFacade.getPersonFacade(EMF);
+    private static final UserFacade FACADE =  UserFacade.getUserFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     @GET
@@ -55,8 +59,8 @@ public class PersonResource {
 
         EntityManager em = EMF.createEntityManager();
         try {
-            TypedQuery<Person> query = em.createQuery ("select u from Person u", entities.Person.class);
-            List<Person> users = query.getResultList();
+            TypedQuery<User> query = em.createQuery ("select u from User u", entities.User.class);
+            List<User> users = query.getResultList();
             return "[" + users.size() + "]";
         } finally {
             em.close();
@@ -83,68 +87,47 @@ public class PersonResource {
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("person/{email}")
-    public String getPersonByEmail(@PathParam("email") String email) throws NotFoundException {
+    @Path("user/{userName}")
+    public String getUsersByName(@PathParam("userName") String userName) throws NotFoundException {
 
-        return GSON.toJson(FACADE.getPersonByEmail(email));
+        return GSON.toJson(FACADE.getUserByName(userName));
 
     }
     
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    @Path("person/all")
-    public String getAllPersons() throws NotFoundException {
-        PersonsDTO psDTO = FACADE.getAllPersons();
-        return GSON.toJson(psDTO);
+    @Path("user/all")
+    public String getAllUsers() throws NotFoundException {
+        UsersDTO usDTO = FACADE.getAllUsers();
+        return GSON.toJson(usDTO);
     }
     
     
 //    @POST
 //    @Produces({MediaType.APPLICATION_JSON})
 //    @Consumes({MediaType.APPLICATION_JSON})
-//    public PersonDTO addUser(String user) throws Exception {
-//        PersonDTO u = GSON.fromJson(user, PersonDTO.class);
-//        PersonDTO newPerson = FACADE.makePerson(u);
-//        return newPerson;
+//    public UserDTO addUser(String user) throws Exception {
+//        UserDTO u = GSON.fromJson(user, UserDTO.class);
+//        UserDTO newUser = FACADE.(u);
+//        return newUser;
 //    }    
     
-    @PUT
-    @Path("person")
-    @Produces({MediaType.APPLICATION_JSON})
-    @Consumes({MediaType.APPLICATION_JSON})
-    public Response updatePerson(String person) throws NotFoundException{
-        PersonDTO personDTO = GSON.fromJson(person, PersonDTO.class);
-        FACADE.updatePerson(personDTO);
-        return Response.status(Response.Status.OK).entity("Person updated OK").build();
-    }    
+//    @PUT
+//    @Path("person")
+//    @Produces({MediaType.APPLICATION_JSON})
+//    @Consumes({MediaType.APPLICATION_JSON})
+//    public Response updateUser(String user) throws NotFoundException{
+//        UserDTO userDTO = GSON.fromJson(user, UserDTO.class);
+//        FACADE.updateUser(userDTO);
+//        return Response.status(Response.Status.OK).entity("Person updated OK").build();
+//    }    
     
     @DELETE
-    @Path("delete/{email}")
+    @Path("delete/{userName}")
     @Produces({MediaType.APPLICATION_JSON})
-    public String deletePerson(@PathParam("email") String email) throws NotFoundException {
-        PersonDTO personDelete = FACADE.deletePerson(email);
-        return GSON.toJson(personDelete);
+    public String deleteUser(@PathParam("userName") String userName) throws NotFoundException {
+        UserDTO userDelete = FACADE.deleteUser(userName);
+        return GSON.toJson(userDelete);
     }
     
-    @PUT
-    @Path("addHobby/{email}/{id}")
-    @Produces({MediaType.APPLICATION_JSON})
-    @Consumes({MediaType.APPLICATION_JSON})
-    public Response addHobbyToPerson(@PathParam("email")String email, @PathParam("id")long id) throws NotFoundException{
-        
-        FACADE.addHobbyToPerson(email, id);
-        
-        return Response.status(Response.Status.OK).entity("Person updated OK").build();
-    }  
-    
-    @PUT
-    @Path("removeHobby/{email}/{id}")
-    @Produces({MediaType.APPLICATION_JSON})
-    @Consumes({MediaType.APPLICATION_JSON})
-    public Response removeHobbyFromPerson(@PathParam("email")String email, @PathParam("id")long id) throws NotFoundException{
-        
-        FACADE.removeHobbyFromPerson(email, id);
-        
-        return Response.status(Response.Status.OK).entity("Person updated OK").build();
-    }  
 }

@@ -37,11 +37,11 @@ public class Person implements Serializable {
     @Column(name = "user_pass")
     private String userPass;
 
-    @JoinTable(name = "user_roles", joinColumns = {
-        @JoinColumn(name = "email", referencedColumnName = "email")}, inverseJoinColumns = {
-        @JoinColumn(name = "role_name", referencedColumnName = "role_name")})
-    @ManyToMany (cascade = CascadeType.PERSIST)
-    private List<Role> roleList = new ArrayList<>();
+//    @JoinTable(name = "user_roles", joinColumns = {
+//        @JoinColumn(name = "email", referencedColumnName = "email")}, inverseJoinColumns = {
+//        @JoinColumn(name = "role_name", referencedColumnName = "role_name")})
+//    @ManyToMany (cascade = CascadeType.PERSIST)
+//    private List<Role> roleList = new ArrayList<>();
 
 
     @JoinTable(name = "person_hobbies", joinColumns = {
@@ -82,6 +82,7 @@ public class Person implements Serializable {
         return (BCrypt.checkpw(pw, this.userPass));
     }
 
+    //overflødig?
     public Person(String userName, String userPass) {
         this.email = userName;
         this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt(12));
@@ -138,28 +139,28 @@ public class Person implements Serializable {
         this.hobbyList = hobbyList;
     }
 
-    public List<String> getRolesAsStrings() {
-        if (roleList.isEmpty()) {
-            return null;
-        }
-        List<String> rolesAsStrings = new ArrayList<>();
-        roleList.forEach((role) -> {
-            rolesAsStrings.add(role.getRoleName());
-        });
-        return rolesAsStrings;
-    }
-
-    public List<Role> getRoleList() {
-        return roleList;
-    }
-
-    public void setRoleList(List<Role> roleList) {
-        this.roleList = roleList;
-    }
-
-    public void addRole(Role userRole) {
-        roleList.add(userRole);
-    }
+//    public List<String> getRolesAsStrings() {
+//        if (roleList.isEmpty()) {
+//            return null;
+//        }
+//        List<String> rolesAsStrings = new ArrayList<>();
+//        roleList.forEach((role) -> {
+//            rolesAsStrings.add(role.getRoleName());
+//        });
+//        return rolesAsStrings;
+//    }
+//
+//    public List<Role> getRoleList() {
+//        return roleList;
+//    }
+//
+//    public void setRoleList(List<Role> roleList) {
+//        this.roleList = roleList;
+//    }
+//
+//    public void addRole(Role userRole) {
+//        roleList.add(userRole);
+//    }
 
     public String getPhone() {
         return phone;

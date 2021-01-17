@@ -4,6 +4,7 @@ nb-configuration.xml
 /target/
 
 /src/main/java/utils/SetupTestUsers.java
+/src/main/java/utils/SetupTestDogs.java
 
 
 /nbproject/

@@ -25,7 +25,7 @@ public class Role implements Serializable {
     private String roleName;
 
     @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "roleList")
-    private List<Person> userList;
+    private List<User> userList;
 
     public Role() {
     }
@@ -42,11 +42,11 @@ public class Role implements Serializable {
         this.roleName = roleName;
     }
 
-    public List<Person> getUserList() {
+    public List<User> getUserList() {
         return userList;
     }
 
-    public void setUserList(List<Person> userList) {
+    public void setUserList(List<User> userList) {
         this.userList = userList;
     }
 }
