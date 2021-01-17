@@ -32,7 +32,7 @@ public class Dog implements Serializable {
     private String name;
 
     @Column(name = "dateOfBirth")
-    private LocalDate dateOfBirth;
+    private String dateOfBirth;
     
     @Column (name = "info", length = 255)
     private String info;
@@ -48,7 +48,7 @@ public class Dog implements Serializable {
     public Dog() {
     }
     
-    public Dog(String name, LocalDate dateOfBirth, String info, String breed ) {
+    public Dog(String name, String dateOfBirth, String info, String breed ) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.info = info;
@@ -72,11 +72,11 @@ public class Dog implements Serializable {
         this.name = name;
     }
 
-    public LocalDate getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

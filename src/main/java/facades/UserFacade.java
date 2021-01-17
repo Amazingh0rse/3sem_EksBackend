@@ -1,13 +1,9 @@
 package facades;
 
 
-import dto.PersonDTO;
-import dto.PersonsDTO;
 import dto.UserDTO;
 import dto.UsersDTO;
-import entities.Address;
-import entities.Hobby;
-import entities.Person;
+import entities.Dog;
 import entities.Role;
 import entities.User;
 import errorhandling.NotFoundException;
@@ -110,6 +106,46 @@ public class UserFacade {
                 em.close();
             }
             return new UserDTO(user);
+        }
+    }
+    
+    public void addDogToUser(String userName, long id) throws NotFoundException {
+        EntityManager em = emf.createEntityManager();
+
+        User user = em.find(User.class, userName);
+        Dog dog = em.find(Dog.class, id);
+
+        user.addDog(dog);
+
+        if (user == null) {
+            throw new NotFoundException("No user found");
+        }
+        try {
+            em.getTransaction().begin();
+            em.merge(user);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+    }
+
+    public void removeDogFromUser(String userName, long id) throws NotFoundException {
+        EntityManager em = emf.createEntityManager();
+
+        User user = em.find(User.class, userName);
+        Dog dog = em.find(Dog.class, id);
+
+        user.removeDog(dog);
+
+        if (user == null) {
+            throw new NotFoundException("No person found");
+        }
+        try {
+            em.getTransaction().begin();
+            em.merge(user);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
         }
     }
 }

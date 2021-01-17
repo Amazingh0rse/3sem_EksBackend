@@ -9,7 +9,7 @@ public class DogDTO {
     
     private Long id;
     private String name;
-    private LocalDate dateOfBirth;
+    private String dateOfBirth;
     private String info;
     private String breed;
 
@@ -37,11 +37,11 @@ public class DogDTO {
         this.name = name;
     }
 
-    public LocalDate getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

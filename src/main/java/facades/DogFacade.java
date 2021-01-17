@@ -76,8 +76,8 @@ public class DogFacade {
     }
 
     
-    public DogDTO addDog(String name, LocalDate dateOfBirth, String info, String breed) throws MissingInputException {
-        if (isNameInValid(name, info, breed)) {
+    public DogDTO addDog(String name, String dateOfBirth, String info, String breed) throws MissingInputException {
+        if (isNameInValid(name, info, breed, dateOfBirth)) {
             throw new MissingInputException("Please fill out all fields");
         }
         EntityManager em = emf.createEntityManager();
@@ -107,7 +107,7 @@ public class DogFacade {
         return dsDTO;
 
     }
-    private static boolean isNameInValid(String name, String info, String breed) {
-        return (name.length() == 0) || (info.length() == 0) || (breed.length() == 0);
+    private static boolean isNameInValid(String name, String info, String breed, String dateOfBirth) {
+        return (name.length() == 0) || (info.length() == 0) || (breed.length() == 0) || (dateOfBirth.length() == 0);
     }
 }

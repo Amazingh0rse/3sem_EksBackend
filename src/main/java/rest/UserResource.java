@@ -12,14 +12,17 @@ import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import utils.EMF_Creator;
 
@@ -120,5 +123,27 @@ public class UserResource {
         UserDTO userDelete = FACADE.deleteUser(userName);
         return GSON.toJson(userDelete);
     }
+    
+    @PUT
+    @Path("addDog/{username}/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response addDogToUser(@PathParam("username")String userName, @PathParam("id")long id) throws NotFoundException{
+        
+        FACADE.addDogToUser(userName, id);
+        
+        return Response.status(Response.Status.OK).entity("Dog added to user OK").build();
+    }  
+    
+    @PUT
+    @Path("removeDog/{username}/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response removeDogfromUser(@PathParam("username")String userName, @PathParam("id")long id) throws NotFoundException{
+        
+        FACADE.removeDogFromUser(userName, id);
+        
+        return Response.status(Response.Status.OK).entity("Dog removed from user OK").build();
+    }  
     
 }

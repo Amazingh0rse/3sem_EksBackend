@@ -121,7 +121,13 @@ public class User implements Serializable {
             dogList.add(dog);
             dog.setUser(this);
         }
-        
+    }
+    
+    public void removeDog (Dog dog) {
+        if (dog !=null){
+            dogList.remove(dog);
+            dog.setUser(this);
+        }    
     }
     
     public List<Dog> getDogList() {

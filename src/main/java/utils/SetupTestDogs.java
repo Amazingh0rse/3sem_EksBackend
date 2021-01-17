@@ -23,15 +23,15 @@ public class SetupTestDogs {
         User u4 = new User("Kenny Nickelman", "supersecretpassword");
         User u5 = new User("Jan Monrad", "HundogHund");
 
-        Dog d1 = new Dog("Pølse", LocalDate.of(1989, 12, 18), "This is my Wiener", "mexicanhairless");
-        Dog d2 = new Dog("Løg", LocalDate.of(2010, 5, 19), "Min helt egen chow!", "chow");
-        Dog d3 = new Dog("Sigurd", LocalDate.of(2016, 2, 3), "Sigurd Elsker bjørnetime!", "husky");
-        Dog d4 = new Dog("Bjørn", LocalDate.of(2015, 4, 8), "STOR BAMSE!!", "chow");
-        Dog d5 = new Dog("Mollie", LocalDate.of(2011, 2, 3), "Det her er min mollie", "beagle");
-        Dog d6 = new Dog("Broxigar", LocalDate.of(1953, 2, 13), "Broxigar er lidt mærkelig.. ", "samoyed");
-        Dog d7 = new Dog("Pepsi", LocalDate.of(2020, 1, 1), "This is my pitbull", "pitbull");
-        Dog d8 = new Dog("MoonMoon", LocalDate.of(2016, 2, 27), "God damnit MoonMoon", "samoyed");
-        Dog d9 = new Dog("Darth Vader", LocalDate.of(2013, 5, 24), "I think he might have faceplanted the wall", "pug");
+        Dog d1 = new Dog("Pølse", "1989/12/18", "This is my Wiener", "mexicanhairless");
+        Dog d2 = new Dog("Løg", "2010/5/19", "Min helt egen chow!", "chow");
+        Dog d3 = new Dog("Sigurd", "2016/2/3", "Sigurd Elsker bjørnetime!", "husky");
+        Dog d4 = new Dog("Bjørn", "2015/4/8", "STOR BAMSE!!", "chow");
+        Dog d5 = new Dog("Mollie", "2011/2/3", "Det her er min mollie", "beagle");
+        Dog d6 = new Dog("Broxigar", "1953/2/13", "Broxigar er lidt mærkelig.. ", "samoyed");
+        Dog d7 = new Dog("Pepsi", "2020/1/1", "This is my pitbull", "pitbull");
+        Dog d8 = new Dog("MoonMoon", "2016/2/27", "God damnit MoonMoon", "samoyed");
+        Dog d9 = new Dog("Darth Vader", "2013/5/24", "I think he might have faceplanted the wall", "pug");
         
 
         if (u1.getUserPassword().equals("test") || u2.getUserPassword().equals("test") || u3.getUserPassword().equals("test")) {
