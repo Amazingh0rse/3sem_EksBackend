@@ -50,7 +50,29 @@ public class BreedResource {
         String breeds = HttpUtils.fetchData("https://dog-info.cooljavascript.dk/api/breed");
         System.out.println(breeds);
         
-        return GSON.toJson(breeds);
+        return breeds;
+    }
+    
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("bybreed/{breed}")
+    public String getBreed(@PathParam("breed") String breed) throws NotFoundException, IOException {
+        System.out.println(breed);
+        String getbreed = HttpUtils.fetchData("https://dog-info.cooljavascript.dk/api/breed/"+breed);
+        System.out.println();
+        
+        return getbreed;
+    }
+    
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("breedimg/{breed}")
+    public String getBreedimg(@PathParam("breed") String breed) throws NotFoundException, IOException {
+        System.out.println(breed);
+        String getimg = HttpUtils.fetchData("https://dog-image.cooljavascript.dk/api/breed/random-image/"+breed);
+        System.out.println();
+        
+        return getimg;
     }
     
 }
