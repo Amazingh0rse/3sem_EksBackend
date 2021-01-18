@@ -7,7 +7,7 @@ public class FetchTester {                  //Testing file to check the return f
 
     public static void main(String[] args) throws IOException {
 
-        String chuck = HttpUtils.fetchData("https://api.chucknorris.io/jokes/random");
+        String chuck = HttpUtils.fetchData("https://dog-info.cooljavascript.dk/api/breed");
         String dad = HttpUtils.fetchData("https://icanhazdadjoke.com");
 
         System.out.println("JSON fetched from chucknorris:");
